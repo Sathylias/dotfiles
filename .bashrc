@@ -36,7 +36,11 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-PS1='[\[\e[1;35m\]CLOUD\[\e[0m\]] [\u] @ [\h] :: [\w] '
+if [[ -z $ENVTAG ]]; then
+    PS1='[\u] @ [\h] :: [\w] '
+else
+    PS1='[\[\e[1;35m\]$ENVTAG\[\e[0m\]] [\u] @ [\h] :: [\w] '
+fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
