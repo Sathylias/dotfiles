@@ -1,19 +1,4 @@
 set nocompatible
-" set t_Co=256
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-
-Plugin 'tpope/vim-vinegar'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-airline/vim-airline'
-Plugin 'scrooloose/syntastic'
-
-call vundle#end()            
 
 filetype on
 filetype plugin indent on
@@ -67,30 +52,16 @@ nnoremap <SPACE> <Nop>
 let mapleader="\<SPACE>"        "Leader is comma
 inoremap jk <esc>
 
-" VIM AIRLINE SETUP
 set laststatus=2
 set ttimeoutlen=50
-let g:airline_theme='serene'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_section_b = '' 
-let g:airline#extension#tabline#fnamemod = ':t'
-autocmd FileType * unlet! g:airline#extensions#whitespace#checks
 
 " BUFFER CONFIG
 nmap <leader>l :bnext<CR>
 nmap <leader>h :bprev<CR>
 
-" NEEDED FOR CLANG COMPLETE
-let g:clang_user_options='||exit 0'
-let g:clang_complete_auto = 1
-let g:clang_complete_copen = 1
-
 " VIM AESTHETIC
 hi LineNr ctermfg=black
 hi CursorLineNR ctermfg=white
-hi YcmErrorLine ctermbg=NONE ctermfg=NONE
-hi YcmErrorSection ctermbg=DARKBLUE ctermfg=NONE
-hi YcmErrorSign ctermbg=white ctermfg=black
 hi VertSplit cterm=bold ctermfg=white
 
 " SOME MORE REMAPS 
@@ -100,8 +71,5 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" PYTHON CONFIG
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-
+" HTML CONFIG
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
