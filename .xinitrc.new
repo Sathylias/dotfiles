@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+xset r rate 200 50
+pulseaudio --start
+
+solaire $HOME/Pictures/motocross_saito_1.gif --delay 0.08 &
+sh /home/sysadmin/scripts/dwmbar.sh &
+
+# Unclutter causes an issue while running alongside picom
+# Issue being that windows will randomly lose focus, very annoying..
+#unclutter &
+picom &
+
+while true; do
+    # Log stderror to a file
+    dwm 2> ~/.dwm.log
+    # No error logging
+    #dwm >/dev/null 2>&1
+done
