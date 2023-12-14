@@ -29,6 +29,7 @@ reset="\[\e[0m\]"
 
 [ -f ~/.bash_functions ] && . ~/.bash_functions
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/.bash_secrets ] && . ~/.bash_secrets
 
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
