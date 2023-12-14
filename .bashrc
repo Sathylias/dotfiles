@@ -8,6 +8,7 @@ esac
 
 export EDITOR=vim
 export COLORTERM=truecolor
+export HISTTIMEFORMAT="%d/%m/%y %T "
 
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
@@ -15,6 +16,10 @@ HISTFILESIZE=2000
 
 shopt -s histappend
 shopt -s checkwinsize
+shopt -s autocd
+shopt -s cdspell
+shopt -s dirspell
+shopt -s cdable_vars
 
 green="\[\e[1;32m\]"
 yellow="\[\e[33m\]"
@@ -22,13 +27,12 @@ red="\[\e[31m\]"
 blue="\[\e[1;34m\]"
 reset="\[\e[0m\]"
 
+[ -f ~/.bash_functions ] && . ~/.bash_functions
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
-
-git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
 
 export PS1="($red\D{%H:%M}$reset | $green\u$reset at $yellow\h$reset in $blue\w$reset)$yellow\$(git_branch)$reset $ "
 
@@ -42,8 +46,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
-
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -52,4 +54,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-[[ -d ~/scripts ]] && export PATH=$HOME/scripts:$PATH
+[ -d ~/scripts ] && export PATH=$HOME/scripts:$PATH
