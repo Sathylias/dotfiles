@@ -15,38 +15,32 @@
 ;;;;;;;;;;;;;;;;;
 
 ;; Load my favorite theme
-;;(use-package moe-theme
-;;    :config (load-theme 'moe-dark t))
-(setq backup-directory-alist '((".*" . "~/.trash")))
+(use-package moe-theme
+  :config (load-theme 'moe-dark t))
+
 (setq inhibit-startup-message t
       inhibit-splash-screen t
       inhibit-startup-echo-area-message t
       initial-buffer-choice "~/.org/main.org"
       show-paren-mode t
-      pop-up-frames t
-      global-linum-mode 0
+      ;;global-linum-mode t
       column-number-mode t)
 
-;;(global-linum-mode 0)
+(global-linum-mode t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-;;(fringe-mode '(nil . 0))
-;;(scroll-bar-mode -1)
+(fringe-mode '(nil . 0))
+(scroll-bar-mode -1)
 (set-face-attribute 'fringe nil :background nil)
-;;(set-face-attribute 'linum nil :background nil)
+(set-face-attribute 'linum nil :background nil)
 
-;;(set-frame-font "DEC Terminal 12" nil t)
+(set-frame-font "DEC Terminal 12" nil t)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; Todoist Integration
-;;(use-package todoist)
-
 ;; Evil Mode for easier key bindings
 (use-package evil
-  :init 
-  (setq evil-want-C-i-jump nil)
   :config
   (evil-mode 1))
 
@@ -79,15 +73,5 @@
     (dired org-file)))
 
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(mode-line ((t (:foreground "white" :height 1.0 :weight bold))))
- '(mode-line-buffer-id ((t (:foreground "white" :height 1.0 :weight bold)))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(todoist key-chord use-package moe-theme evil)))
+ '(mode-line ((t (:background "#FF4EA3" :foreground "white" :overline t :underline t :height 1.0 :weight bold))))
+ '(mode-line-buffer-id ((t (:background "#FF4EA3" :foreground "white" :overline t :underline t :height 1.0 :weight bold)))))
