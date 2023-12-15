@@ -25,7 +25,9 @@
       show-paren-mode t
       pop-up-frames t
       global-linum-mode 0
-      column-number-mode t)
+      column-number-mode t
+      vc-follow-symlinks t) ;; Don't prompt for following symlinks
+
 
 ;;(global-linum-mode 0)
 (tool-bar-mode -1)
@@ -64,6 +66,20 @@
   (setq sh-indentation 2))
 
 (add-hook 'sh-mode-hook #'shell-mode-setup)
+
+;; ORG Mode Stuff
+(setq org-todo-keywords
+  '((sequence "TODO"
+      "STARTED"
+      "DONE")))
+
+;; Automatically change TODO entry to DONE when all children are marked as DONE
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-todo-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
 ;; Helper function to toggle our main Org file 
 (defun toggle-buffer-org ()
