@@ -59,3 +59,4 @@ if ! shopt -oq posix; then
 fi
 
 [ -d ~/scripts ] && export PATH=$HOME/scripts:$PATH
+[ -d ~/bin ] && export PATH=$HOME/bin:$PATH
