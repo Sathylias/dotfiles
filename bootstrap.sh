@@ -6,6 +6,8 @@ current_dir=$(pwd)
 
 home_dotfiles=(
     .bashrc
+    .bash_functions
+    .bash_aliases
     .emacs
     .gitconfig
     .guile
