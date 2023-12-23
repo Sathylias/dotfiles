@@ -18,8 +18,10 @@ packages=(
   mupdf
   tmux
   curl
+  pass
   fzf
   weechat
+  keychain
   dbus-x11
 )
 
@@ -41,7 +43,7 @@ main() {
 
   # Install required packages
   apt install "${packages[@]}" -y
-  
+
 }
 
 main "$@"
