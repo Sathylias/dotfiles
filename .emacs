@@ -8,8 +8,8 @@
 (require 'use-package)
 (setq use-package-always-ensure 't)
 
-(use-package moe-theme
-  :config (load-theme 'moe-dark t))
+(use-package doom-themes
+  :config (load-theme 'doom-xcode t))
 
 (use-package mood-line
   :config
@@ -29,19 +29,16 @@
       inhibit-startup-echo-area-message t
       initial-buffer-choice "~/.org/main.org"
       show-paren-mode t
-      pop-up-frames t ;;For Windows, this should be set to false
       column-number-mode t
       vc-follow-symlinks t) ;; Don't prompt for following symlinks
 
-(global-linum-mode 1)
-(setq linum-format "%3d \u2502 ")
-(setq-default left-fringe-width  10)
+(global-display-line-numbers-mode t)
+(scroll-bar-mode -1)
 
 (setq-default
  default-frame-alist
  '((fullscreen . maximized)
    (menu-bar-lines . 0)
-   (scroll-bar-mode -1)
    (tool-bar-lines . 0)))
 
 (set-face-attribute 'fringe nil :background nil)
@@ -65,7 +62,7 @@
   (setq sh-indentation 2))
 
 (add-hook 'sh-mode-hook #'shell-mode-setup)
-
+(set-frame-font "Cascadia Code 10" nil t)
 ;;(setq org-todo-keywords '((sequence "TODO" "STARTED" "DONE")))
 (setq org-log-done 'time)
 
@@ -76,18 +73,17 @@
 ;;    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
 ;;(add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(mode-line ((t (:foreground "white" :height 1.0 :weight bold))))
- '(mode-line-buffer-id ((t (:foreground "white" :height 1.0 :weight bold)))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(terraform-mode mood-line key-chord use-package moe-theme evil)))
+ '(custom-safe-themes
+   '("f5f80dd6588e59cfc3ce2f11568ff8296717a938edd448a947f9823a4e282b66" "02d422e5b99f54bd4516d4157060b874d14552fe613ea7047c4a5cfa1288cf4f" "8c7e832be864674c220f9a9361c851917a93f921fedb7717b1b5ece47690c098" "6f1f6a1a3cff62cc860ad6e787151b9b8599f4471d40ed746ea2819fcd184e1a" default))
+ '(package-selected-packages '(doom-themes mood-line moe-theme key-chord evil)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
