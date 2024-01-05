@@ -5,6 +5,7 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
 (require 'use-package)
 (setq use-package-always-ensure 't)
 
@@ -23,16 +24,44 @@
   (interactive)
   (find-file "~/.emacs"))
 
+(use-package company
+  :ensure t
+  :config
+  (progn
+    (add-hook 'after-init-hook 'global-company-mode)))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+
+(use-package dired-sidebar
+  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
+  :ensure t
+  :commands (dired-sidebar-toggle-sidebar)
+  :init
+  (add-hook 'dired-sidebar-mode-hook
+            (lambda ()
+              (unless (file-remote-p default-directory)
+                (auto-revert-mode))))
+  :config
+  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+  (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+  ;;(setq dired-sidebar-subtree-line-prefix "__")
+  (setq dired-sidebar-width 45)
+  (setq dired-sidebar-theme 'icons))
+  ;;(setq dired-sidebar-use-term-integration t))
+  ;;(setq dired-sidebar-use-custom-font t))
+
 (setq backup-directory-alist '((".*" . "~/.trash")))
-(setq inhibit-startup-message t
+(setq ;;inhibit-startup-message t
       inhibit-splash-screen t
-      inhibit-startup-echo-area-message t
-      initial-buffer-choice "~/.org/main.org"
+      ;;inhibit-startup-echo-area-message t
+      ;;initial-buffer-choice "~/.org/main.org"
       show-paren-mode t
       column-number-mode t
       vc-follow-symlinks t) ;; Don't prompt for following symlinks
 
 (global-display-line-numbers-mode t)
+
 (scroll-bar-mode -1)
 
 (setq-default
@@ -60,9 +89,11 @@
 
 (defun shell-mode-setup ()
   (setq sh-indentation 2))
-
 (add-hook 'sh-mode-hook #'shell-mode-setup)
-(set-frame-font "Cascadia Code 10" nil t)
+
+;;(set-frame-font "Cascadia Code 10" nil t)
+(set-frame-font "CaskaydiaCove Nerd Font 10" nil t)
+
 ;;(setq org-todo-keywords '((sequence "TODO" "STARTED" "DONE")))
 (setq org-log-done 'time)
 
@@ -80,7 +111,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("f5f80dd6588e59cfc3ce2f11568ff8296717a938edd448a947f9823a4e282b66" "02d422e5b99f54bd4516d4157060b874d14552fe613ea7047c4a5cfa1288cf4f" "8c7e832be864674c220f9a9361c851917a93f921fedb7717b1b5ece47690c098" "6f1f6a1a3cff62cc860ad6e787151b9b8599f4471d40ed746ea2819fcd184e1a" default))
- '(package-selected-packages '(doom-themes mood-line moe-theme key-chord evil)))
+ '(package-selected-packages
+   '(all-the-icons doom-themes mood-line moe-theme key-chord evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
