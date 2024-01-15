@@ -2,8 +2,8 @@
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
 (use-package dired-sidebar
-  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
   :ensure t
+  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
   :commands (dired-sidebar-toggle-sidebar)
   :init
   (add-hook 'dired-sidebar-mode-hook
@@ -13,10 +13,10 @@
   :config
   (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
   (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
-  ;;(setq dired-sidebar-subtree-line-prefix "__")
-  (setq dired-sidebar-width 45)
-  (setq dired-sidebar-theme 'icons))
-  ;;(setq dired-sidebar-use-term-integration t))
-  ;;(setq dired-sidebar-use-custom-font t))
+  (setq dired-sidebar-width 35)
+  (setq dired-sidebar-theme 'icons)
+  (setq dired-sidebar-use-term-integration t))
+
+(add-hook 'dired-sidebar-mode-hook (lambda () (display-line-numbers-mode -1)))
 
 (provide 'init-dired)
