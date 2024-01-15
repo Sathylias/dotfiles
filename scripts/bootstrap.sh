@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
-
 # Simple Bootstrap script to install my dotfiles
 
-current_dir=$(pwd)
+dotfiles_dir=$(dirname $(dirname $(readlink -fm $0)))
 
 home_dotfiles=(
     .bashrc
     .bash_functions
     .bash_aliases
-    .emacs
     .gitconfig
     .guile
     .tmux.conf
@@ -18,8 +16,12 @@ home_dotfiles=(
 # Symlink our dotfiles
 for dotfile in "${home_dotfiles[@]}"; do
     echo "> Symlinking $dotfile to HOME directory."
-    ln -sf "$current_dir/$dotfile" $HOME/$dotfile
+    if [[ -d "$dotfiles_dir/$dotfile" ]]; then
+    	rm -rf "$HOME/$dotfile" && ln -sf "$dotfiles_dir/$dotfile" $HOME/
+    else
+    	ln -sf "$dotfiles_dir/$dotfile" $HOME/$dotfile
+    fi
 done
 
 # Place various configurations where they're supposed to be 
-mkdir -p "$HOME/.gnupg" && cp gpg-agent.conf "$HOME/.gnupg/"
+mkdir -p "$HOME/.gnupg" && cp "$dotfiles_dir/gpg-agent.conf" "$HOME/.gnupg/"
