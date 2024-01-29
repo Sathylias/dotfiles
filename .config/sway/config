@@ -14,12 +14,13 @@ set $workspace3 web
 set $workspace4 misc
 set $workspace5 base
 
-xwayland disable
+xwayland enable
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-#set $menu dmenu_path | dmenu | xargs swaymsg exec --
+#set $menu wofi --show run -c $HOME/.config/config -s $HOME/.config/nord.css | xargs swaymsg exec --
+set $menu wofi
 
 include /etc/sway/config-vars.d/*
 
@@ -40,8 +41,8 @@ seat * hide_cursor 5000
 seat * hide_cursor when-typing enable
 
 # Custom terminal launcher for applications
-bindsym $mod+r exec foot --title="launcher" sh -c "bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec'"
-for_window [title="^launcher$"] floating enable, border pixel 2, resize set width 800 height 300
+#bindsym $mod+r exec foot --title="launcher" sh -c "bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec'"
+#for_window [title="^launcher$"] floating enable, border pixel 2, resize set width 800 height 300
 
 # No title bar for all windows
 default_border pixel 2
@@ -89,7 +90,7 @@ input "3141:30359:SONiX_USB_DEVICE" {
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    #bindsym $mod+d exec $menu
+    bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -127,6 +128,10 @@ input "3141:30359:SONiX_USB_DEVICE" {
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+    
+
+    bindsym $mod+o exec "pamixer -d 5"
+    bindsym $mod+p exec "pamixer -i 5"
 
 #
 # Workspaces:
@@ -214,21 +219,20 @@ mode "resize" {
 #
 # Status Bar:
 #
-# Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
     font "Terminus (TTF)"
+    workspace_min_width 75px 
+    gaps 5 10
+    height 25
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    #status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-    status_command while ~/.config/sway/scripts/swaybar.sh; do sleep 3; done
+    status_command while ~/.config/sway/scripts/swaybar.sh; do sleep 1; done
 
     colors {
         statusline #ffffff
-        #background #323232
-        background #ffffff00
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        background #434C5E90
+        inactive_workspace #434C5E90 #434C5E90 #7c7c7c
+        focused_workspace #ffffff00 #81A1C190 #ffffff
     }
 }
 
