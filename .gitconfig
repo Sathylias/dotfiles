@@ -3,3 +3,11 @@
 [user]
 	name = Maxime Daraiche
 	email = maxiscoding@gmail.com
+[credential]
+	helper = 
+	helper = /usr/local/bin/git-credential-manager
+	credentialStore = gpg
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[push]
+	autoSetupRemote = true
